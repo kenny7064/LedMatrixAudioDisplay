@@ -1,51 +1,179 @@
-# LedMatrixAudioDisplay
-An WS2812B matrix pixel art display- powered via an esp32 running WLED, and an raspberry pi zero that converts the audio signal into pixel art.
-The whole idea and concept of this was to make a creative way to visulize my record player in my room whilst also expanding my knowledge in the led world as ive never really done anything like that. 
+# 🎵 LED Matrix Audio Visualizer
 
+An audio-reactive **WS2812B LED matrix display** powered by an ESP32 running WLED and a Raspberry Pi Zero.
+The system converts audio signals into dynamic pixel art, creating a visual experience for music playback.
 
-PARTS:
-Led Displays 4pck	24.04
-Power source	32.43
+---
 
-fuses	1
-wire 	10
-esp32 	6
-raspberry pi 	20
-analog to digital audio converter 	7
-3d prints	2
-misc	10
-Those parts bring the total price to ~115
-Definetly not as cheap as i would like and i could probably have sourced parts better but this is what was available to me
+## 📌 Overview
 
+This project was designed as a creative way to visualize audio from a record player while also learning more about addressable LEDs and embedded systems.
 
-BUILD:
-  STEP ONE: Attach the 3D printed pieces together using glue and taping around the outside for added ridgity (Im hoping to redesign the model to snap together this is just proof of concept/prototype)
+The display consists of four 16×16 WS2812B panels mounted in a custom 3D-printed frame, with power distributed safely across each panel.
 
+---
 
-  STEP TWO: Attach the Matrices to ideally a 12x12in small board or just directly to the 3d printed frame
-<img width="4284" height="5712" alt="IMG_5552" src="https://github.com/user-attachments/assets/df83ed7c-7ae5-4b2b-a74e-f7812f31684a" />
-<img width="4284" height="5712" alt="IMG_5553" src="https://github.com/user-attachments/assets/b4d238ce-27fc-4fe1-b06a-04074faa1c3e" />
+## 💰 Parts & Cost Breakdown
 
-  STEP THREE: Prep ground wires my stripping about 5-7mm of wire on one side and tinning it - then crimping a lug onto the other end to connecct to the power source. for the live wire first solder on the fuse holder and added heat shrink, then preform the same prep you did on the negative wire: wires should look like this when youre done.<img width="5712" height="4284" alt="IMG_5554" src="https://github.com/user-attachments/assets/50315c34-6f6a-4f17-a15e-bdd312c85dd3" />
-<img width="5712" height="4284" alt="IMG_5555" src="https://github.com/user-attachments/assets/e50e73ab-d234-4f22-8a06-235b9403767a" />
+| Part                              | Cost ($) |
+| --------------------------------- | -------: |
+| LED Displays (4 pack)             |    24.04 |
+| Power Supply                      |    32.43 |
+| Fuses                             |        1 |
+| Wire                              |       10 |
+| ESP32                             |        6 |
+| Raspberry Pi Zero                 |       20 |
+| Analog to Digital Audio Converter |        7 |
+| 3D Prints                         |        2 |
+| Miscellaneous                     |       10 |
 
-  STEP FOUR: Solder on the exposed end of the negative and positive wires onto the back of each panel- i dont reccomend daisy chaining as each panel can pull about 15 amps
-    Make sure to tin both the wires as well as add a good amount of solder onto each pad. Be sure to clean the flux after using isophrophyl alchohol
-<img width="3024" height="4032" alt="IMG_5556" src="https://github.com/user-attachments/assets/04e76f31-1118-4edf-8662-6d1ed89d26b3" />
-  I would also reccomend connecting a smaller negative and positive wires to one of the terminals so it can power the esp and pi.
+**Total:** ~115 USD
 
-  STEP FIVE: Connect each data wire using the DOUT and DIN til all four panels are connected
+> Not as cheap as intended — parts could definitely be sourced better, but this was built with what was available.
 
-  STEP SIX: Wire the esp32 and raspberry pi zero like this 
-    ESP32 GND -> Led Ground
-    ESP32 5V -> Led 5V
-    Pi GND -> Led Ground
-    Pi 5V -> Led 5V
-    ESP32 GPIO 5 -> LED DIN
-    <img width="3024" height="4032" alt="IMG_5584" src="https://github.com/user-attachments/assets/10c051af-6d4c-42e0-b184-c07b27df3888" />
+---
 
+## 🧰 Materials
 
-  Also if youre like me and don't wanna buy an adapter you can solder the audio adapter just to the pins located on the bottom of the pi-
+* 4× 16×16 WS2812B LED panels
+* ESP32 WROOM (WLED controller)
+* Raspberry Pi Zero (audio processing)
+* 4× fuse holders + 10A blade fuses
+* 14 AWG wire (power distribution)
+* 22 AWG wire (signal wiring)
+* Heat shrink tubing
+* 3D printed PLA frame
+* 12×12 inch, 2mm melamine board
+* Hot glue
+* Analog-to-digital audio converter
 
-  STEP SEVEN: Connect each terminal red to the PSU V+ and black to the V- ports; 2 on each terminal. also connect an old power cord with ground to the PSUs AC inputs
-  
+---
+
+## ⚡ Power Notes
+
+* Each panel can draw significant current at full brightness
+* Panels are powered **individually (not daisy-chained)** to prevent voltage drop
+* 14 AWG wire was used for main power lines to improve safety and reduce losses
+
+---
+
+## 🛠 Build
+
+### STEP ONE — Frame Assembly
+
+Attach the 3D printed pieces together using glue.
+Tape around the outside for added rigidity.
+
+> This is a prototype — future version will use snap-fit parts.
+
+---
+
+### STEP TWO — Mount Panels
+
+Attach the LED matrices to:
+
+* a 12×12 inch backing board
+  **or**
+* directly to the 3D printed frame
+
+---
+
+### STEP THREE — Prepare Power Wires
+
+* Strip ~5–7mm of insulation
+* Tin exposed wire
+* Crimp lugs for PSU connection
+
+For positive wires:
+
+* Solder in fuse holder
+* Add heat shrink
+
+---
+
+### STEP FOUR — Solder Power to Panels
+
+* Solder power wires directly to each panel
+* Do **not daisy-chain power**
+
+> Each panel can draw high current — direct wiring is safer
+
+* Tin pads and wires before soldering
+* Clean flux with isopropyl alcohol
+
+Optional:
+
+* Run smaller power leads to ESP32 and Pi
+
+---
+
+### STEP FIVE — Data Connections
+
+Connect panels in sequence:
+
+```
+Panel 1 DOUT → Panel 2 DIN
+Panel 2 DOUT → Panel 3 DIN
+Panel 3 DOUT → Panel 4 DIN
+```
+
+---
+
+### STEP SIX — Controller Wiring
+
+**ESP32:**
+
+* GND → LED Ground
+* 5V → LED 5V
+* GPIO 5 → LED DIN
+
+**Raspberry Pi Zero:**
+
+* GND → LED Ground
+* 5V → LED 5V
+
+Audio input can be soldered directly to the Pi GPIO pins if no adapter is available.
+
+---
+
+### STEP SEVEN — Power Supply
+
+* Connect all positive wires to PSU **V+**
+* Connect all negative wires to PSU **V-**
+* Use 2 connections per terminal if needed
+* Connect AC input using a grounded power cable
+
+⚠️ Be careful when working with AC power
+
+---
+
+## 🚀 Future Improvements
+
+* Snap-fit frame design
+* Cleaner wiring layout
+* Better power distribution system
+* Improved enclosure aesthetics
+
+---
+
+## 📷 Media
+
+(Add your build images here)
+
+---
+
+## 🧠 What I Learned
+
+* Power distribution for high-current LED systems
+* ESP32 + WLED configuration
+* Audio signal processing with Raspberry Pi
+* Importance of wire gauge and voltage drop
+
+---
+
+## 🔥 Final Thoughts
+
+This project was a first dive into LED systems and turned into a fully functional audio visualizer.
+While not perfect, it laid the groundwork for more advanced builds in the future.
+
+---
